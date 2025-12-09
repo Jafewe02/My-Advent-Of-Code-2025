@@ -1,23 +1,26 @@
 dialPosition = int(50)
 result = int(0)
-lineCount = int(0)
 
 with open("./input.txt", "rt", encoding="UTF-8") as infos:
   for i in infos:
-    lineCount = lineCount + 1
+    oldPosition = dialPosition
     i = i.strip()
     direction = i[0]
     dialTurningRange = int(i[1:])
+    while(dialTurningRange >= 100):
+      result += 1
+      dialTurningRange -= 100
     match direction:
       case "L":
-        dialPosition = dialPosition - dialTurningRange
+        dialPosition -= dialTurningRange
       case "R":
-        dialPosition = dialPosition + dialTurningRange
+        dialPosition += dialTurningRange
       case _:
         print("Error")
+    if (dialPosition < 0 or dialPosition > 100) and oldPosition != 0:
+      result += 1
     dialPosition = dialPosition % 100
     if dialPosition == 0:
-      result = result + 1
+      result += 1
       
-print(lineCount)
 print(result)
