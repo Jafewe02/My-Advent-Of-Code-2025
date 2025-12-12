@@ -1,26 +1,11 @@
-dialPosition = int(50)
-result = int(0)
-
-with open("./input.txt", "rt", encoding="UTF-8") as infos:
-  for i in infos:
-    oldPosition = dialPosition
-    i = i.strip()
-    direction = i[0]
-    dialTurningRange = int(i[1:])
-    while(dialTurningRange >= 100):
-      result += 1
-      dialTurningRange -= 100
-    match direction:
-      case "L":
-        dialPosition -= dialTurningRange
-      case "R":
-        dialPosition += dialTurningRange
-      case _:
-        print("Error")
-    if (dialPosition < 0 or dialPosition > 100) and oldPosition != 0:
-      result += 1
-    dialPosition = dialPosition % 100
-    if dialPosition == 0:
-      result += 1
-      
-print(result)
+f = open("input.txt")
+fileContent = f.read()
+f.close()
+fileContent = fileContent.strip()
+idRanges = fileContent.split(',')
+for ids in idRanges:
+  id1 = int(ids.split('-')[0])
+  id2 = int(ids.split('-')[1])
+  while(id1 <= id2):
+    id1 += 1
+    print(id1)
